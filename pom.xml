@@ -16,5 +16,11 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version> <!-- Use uma versão adequada ao seu projeto -->
         </dependency>
+        <dependency>
+            <groupId>com.dukescript.nbjavac</groupId>
+            <artifactId>nb-javac</artifactId>
+            <version>jdk-24+29</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 </project>

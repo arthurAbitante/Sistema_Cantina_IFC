@@ -25,7 +25,7 @@ import javax.swing.SwingUtilities;
  *
  * @author arthur
  */
-public class TelaClientesTeste extends javax.swing.JFrame {
+public class TelaClientes extends javax.swing.JFrame {
     
     private JTable tabela;
     private ClienteTableModel modelo;
@@ -34,7 +34,7 @@ public class TelaClientesTeste extends javax.swing.JFrame {
     // Campos de texto
     private JTextField txtMatricula, txtCpf, txtRg, txtNome, txtCurso, txtIdade, txtEndereco;
 
-    public TelaClientesTeste() {
+    public TelaClientes() {
         dao = new ClienteDAO();
 
         // Criar tabela
@@ -182,7 +182,7 @@ public class TelaClientesTeste extends javax.swing.JFrame {
     
     
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaClientesTeste.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaClientes.class.getName());
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -226,7 +226,7 @@ public class TelaClientesTeste extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        SwingUtilities.invokeLater(() -> new TelaClientesTeste().setVisible(true));
+        SwingUtilities.invokeLater(() -> new TelaClientes().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
