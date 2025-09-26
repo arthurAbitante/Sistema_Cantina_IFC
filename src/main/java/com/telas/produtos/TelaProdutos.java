@@ -97,6 +97,7 @@ public class TelaProdutos extends javax.swing.JFrame {
     private void inserirProduto(){
         try{
             Produto p = new Produto(
+                    txtCodigo.getText(),
                     txtNome.getText(),
                     txtDescricao.getText(),
                     Integer.parseInt(txtQuantidade.getText())

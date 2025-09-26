@@ -1,13 +1,12 @@
 com/mycompany/engsoft/TelaPrincipal$2.class
-com/mycompany/engsoft/EngSoft.class
-com/mycompany/engsoft/TelaPrincipal$1.class
-com/bd/Beans/ClienteTableModel.class
-com/mycompany/engsoft/Conexao.class
-com/telas/clientes/TelaClientes.class
 com/bd/Beans/ProdutoTableModel.class
 com/bd/DAOs/ProdutoDAO.class
 com/telas/produtos/TelaProdutos.class
+com/mycompany/engsoft/TelaPrincipal$1.class
+com/bd/Beans/ClienteTableModel.class
+com/mycompany/engsoft/Conexao.class
 com/mycompany/engsoft/TelaPrincipal.class
+com/telas/clientes/TelaClientes.class
 com/bd/Beans/Cliente.class
 com/bd/DAOs/ClienteDAO.class
 com/bd/Beans/Produto.class

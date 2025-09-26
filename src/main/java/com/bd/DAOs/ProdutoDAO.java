@@ -26,9 +26,9 @@ public class ProdutoDAO {
             PreparedStatement stmt = conn.prepareStatement(sql);
             
             stmt.setString(1, produto.getCodigo());
-            stmt.setString(1, produto.getNome());
-            stmt.setString(1, produto.getDescricao());
-            stmt.setInt(1, produto.getQuantidade());
+            stmt.setString(2, produto.getNome());
+            stmt.setString(3, produto.getDescricao());
+            stmt.setInt(4, produto.getQuantidade());
 
             stmt.executeUpdate();
             System.out.println("Produto inserido com sucesso");
