@@ -5,6 +5,7 @@
 package com.mycompany.engsoft;
 
 import com.telas.clientes.TelaClientes;
+import com.telas.produtos.TelaProdutos;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
@@ -134,6 +135,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu2.setText("Produto");
 
         jMenuItem4.setText("Cadastro/Listagem");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuBar1.add(jMenu2);
@@ -210,6 +216,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
   
         dispose();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        new TelaProdutos().setVisible(true);
+
+        dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments

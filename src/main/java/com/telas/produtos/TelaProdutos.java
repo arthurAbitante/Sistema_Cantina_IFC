@@ -5,6 +5,7 @@
 package com.telas.produtos;
 
 import com.bd.Beans.ClienteTableModel;
+import com.bd.Beans.Produto;
 import com.bd.Beans.ProdutoTableModel;
 import com.bd.DAOs.ClienteDAO;
 import com.bd.DAOs.ProdutoDAO;
@@ -36,36 +37,126 @@ public class TelaProdutos extends javax.swing.JFrame {
     private ProdutoDAO dao;
 
     // Campos de texto
-    private JTextField txtNome, txtDescricao, txtQuantidade;
+    private JTextField txtCodigo, txtNome, txtDescricao, txtQuantidade;
     
     
     
     public TelaProdutos(){
+        dao = new ProdutoDAO();
         
+        modelo = new ProdutoTableModel(dao.listar());
+        tabela = new JTable(modelo);
+        JScrollPane scroll = new JScrollPane(tabela);
+        
+        JPanel formPanel = new JPanel(new GridLayout(7, 2, 5, 5));
+        formPanel.setBorder(BorderFactory.createTitledBorder("Dados do produto"));
+        
+        txtCodigo = new JTextField();
+        txtNome = new JTextField();
+        txtDescricao = new JTextField();
+        txtQuantidade = new JTextField();
+        
+        formPanel.add(new JLabel("Código: "));
+        formPanel.add(txtCodigo);
+        formPanel.add(new JLabel("Nome:"));
+        formPanel.add(txtNome);
+        formPanel.add(new JLabel("Descrição:"));
+        formPanel.add(txtDescricao);
+        formPanel.add(new JLabel("Quantidade:"));
+        formPanel.add(txtQuantidade);
+        
+        JPanel buttonPanel = new JPanel();
+        JButton btnInserir = new JButton("Inserir");
+        JButton btnAtualizar = new JButton("Atualizar");
+        JButton btnDeletar = new JButton("Deletar");
+        JButton btnRecarregar = new JButton("Recarregar");
+        
+        buttonPanel.add(btnInserir);
+        buttonPanel.add(btnAtualizar);
+        buttonPanel.add(btnDeletar);
+        buttonPanel.add(btnRecarregar);
+        
+        btnInserir.addActionListener(e -> inserirProduto());
+        btnAtualizar.addActionListener(e -> atualizarProduto());
+        btnDeletar.addActionListener(e -> deletarProduto());
+        btnRecarregar.addActionListener(e -> atualizarTabela());
+        
+        tabela.getSelectionModel().addListSelectionListener(e -> preencherCampos());
+        
+        setLayout(new BorderLayout());
+        add(scroll, BorderLayout.CENTER);
+        add(formPanel, BorderLayout.NORTH);
+        add(buttonPanel, BorderLayout.SOUTH);
+        
+        setTitle("CRUD Produtos");
+        setSize(900, 500);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
     private void inserirProduto(){
-        
+        try{
+            Produto p = new Produto(
+                    txtNome.getText(),
+                    txtDescricao.getText(),
+                    Integer.parseInt(txtQuantidade.getText())
+            );
+            dao.inserir(p);
+            atualizarTabela();
+            limparCampos();
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this, "Erro ao inserir: " + ex.getMessage());
+        }
     }
     
     private void atualizarProduto(){
-        
+                try {
+            Produto p = new Produto(
+                    txtCodigo.getText(),
+                    txtNome.getText(),
+                    txtDescricao.getText(),
+                    Integer.parseInt(txtQuantidade.getText())
+            );
+            dao.atualizar(p);
+            atualizarTabela();
+            limparCampos();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao atualizar: " + ex.getMessage());
+        }
     }
     
     private void deletarProduto(){
-        
+        String codigo = txtCodigo.getText();
+        if (!codigo.isEmpty()) {
+            dao.deletar(codigo);
+            atualizarTabela();
+            limparCampos();
+        } else {
+            JOptionPane.showMessageDialog(this, "Selecione um produto para deletar.");
+        }
     }
     
     private void atualizarTabela(){
-        
+        List<Produto> produtos = dao.listar();
+        modelo.setProdutos(produtos);
     }
     
     private void preencherCampos(){
+        int row = tabela.getSelectedRow();
+        if (row >= 0) {
+            txtCodigo.setText((String) tabela.getValueAt(row, 0));
+            txtNome.setText((String) tabela.getValueAt(row, 1));
+            txtDescricao.setText((String) tabela.getValueAt(row, 2));
+            txtQuantidade.setText(tabela.getValueAt(row, 3).toString());
+        }
         
     }
     
     private void limparCampos(){
-        
+        txtCodigo.setText("");
+        txtNome.setText("");
+        txtDescricao.setText("");
+        txtQuantidade.setText("");
     }    
     
     

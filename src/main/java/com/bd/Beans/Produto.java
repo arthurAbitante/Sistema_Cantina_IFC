@@ -16,6 +16,13 @@ public class Produto {
     
     public Produto(){}
     
+        
+    public Produto( String nome, String descricao, int quantidade){
+        this.nome = nome;
+        this.descricao = descricao;
+        this.quantidade = quantidade;
+    }
+    
     public Produto(String codigo, String nome, String descricao, int quantidade){
         this.codigo = codigo;
         this.nome = nome;
