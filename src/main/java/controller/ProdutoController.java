@@ -21,14 +21,13 @@ import java.util.List;
 public class ProdutoController {
     
     public void inserir(Produto produto){
-        String sql = "INSERT INTO Produto (Codigo, Nome, Descricao, Quantidade) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Produto (Codigo, Nome, Descricao) VALUES (?, ?, ?)";
         try(Connection conn = Conexao.getConexao()){
             PreparedStatement stmt = conn.prepareStatement(sql);
             
             stmt.setString(1, produto.getCodigo());
             stmt.setString(2, produto.getNome());
             stmt.setString(3, produto.getDescricao());
-            stmt.setInt(4, produto.getQuantidade());
 
             stmt.executeUpdate();
             System.out.println("Produto inserido com sucesso");
@@ -49,8 +48,7 @@ public class ProdutoController {
                 Produto p = new Produto(
                         rs.getString("Codigo"),
                         rs.getString("Nome"),
-                        rs.getString("Descricao"),
-                        rs.getInt("Quantidade")
+                        rs.getString("Descricao")
                 );
                 produtos.add(p);
             }
@@ -72,8 +70,7 @@ public class ProdutoController {
                 return new Produto(
                         rs.getString("Codigo"),
                         rs.getString("Nome"),
-                        rs.getString("Descricao"),
-                        rs.getInt("Quantidade")
+                        rs.getString("Descricao")
                 );
             }
         }catch(SQLException e){
@@ -85,13 +82,12 @@ public class ProdutoController {
     }
     
     public void atualizar(Produto produto){
-           String sql = "UPDATE Produto SET Nome=?, Descricao=?, Quantidade=? WHERE Codigo=?";
+           String sql = "UPDATE Produto SET Nome=?, Descricao=? WHERE Codigo=?";
         try (Connection conn = Conexao.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, produto.getNome());
             stmt.setString(2, produto.getDescricao());
-            stmt.setInt(3, produto.getQuantidade());
             stmt.setString(4, produto.getCodigo());
 
             stmt.executeUpdate();

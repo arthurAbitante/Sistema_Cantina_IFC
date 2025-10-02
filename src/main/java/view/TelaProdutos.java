@@ -4,9 +4,9 @@
  */
 package view;
 
-import model.ClienteTableModel;
+import model.TableModel.ClienteTableModel;
 import model.Produto;
-import model.ProdutoTableModel;
+import model.TableModel.ProdutoTableModel;
 import controller.ClienteController;
 import controller.ProdutoController;
 import view.TelaClientes;
@@ -37,7 +37,7 @@ public class TelaProdutos extends javax.swing.JFrame {
     private ProdutoController dao;
 
     // Campos de texto
-    private JTextField txtCodigo, txtNome, txtDescricao, txtQuantidade;
+    private JTextField txtCodigo, txtNome, txtDescricao;
     
     
     
@@ -54,7 +54,6 @@ public class TelaProdutos extends javax.swing.JFrame {
         txtCodigo = new JTextField();
         txtNome = new JTextField();
         txtDescricao = new JTextField();
-        txtQuantidade = new JTextField();
         
         formPanel.add(new JLabel("Código: "));
         formPanel.add(txtCodigo);
@@ -62,8 +61,6 @@ public class TelaProdutos extends javax.swing.JFrame {
         formPanel.add(txtNome);
         formPanel.add(new JLabel("Descrição:"));
         formPanel.add(txtDescricao);
-        formPanel.add(new JLabel("Quantidade:"));
-        formPanel.add(txtQuantidade);
         
         JPanel buttonPanel = new JPanel();
         JButton btnInserir = new JButton("Inserir");
@@ -99,8 +96,7 @@ public class TelaProdutos extends javax.swing.JFrame {
             Produto p = new Produto(
                     txtCodigo.getText(),
                     txtNome.getText(),
-                    txtDescricao.getText(),
-                    Integer.parseInt(txtQuantidade.getText())
+                    txtDescricao.getText()
             );
             dao.inserir(p);
             atualizarTabela();
@@ -115,8 +111,7 @@ public class TelaProdutos extends javax.swing.JFrame {
             Produto p = new Produto(
                     txtCodigo.getText(),
                     txtNome.getText(),
-                    txtDescricao.getText(),
-                    Integer.parseInt(txtQuantidade.getText())
+                    txtDescricao.getText()
             );
             dao.atualizar(p);
             atualizarTabela();
@@ -148,7 +143,6 @@ public class TelaProdutos extends javax.swing.JFrame {
             txtCodigo.setText((String) tabela.getValueAt(row, 0));
             txtNome.setText((String) tabela.getValueAt(row, 1));
             txtDescricao.setText((String) tabela.getValueAt(row, 2));
-            txtQuantidade.setText(tabela.getValueAt(row, 3).toString());
         }
         
     }
@@ -157,7 +151,6 @@ public class TelaProdutos extends javax.swing.JFrame {
         txtCodigo.setText("");
         txtNome.setText("");
         txtDescricao.setText("");
-        txtQuantidade.setText("");
     }    
     
     

@@ -5,7 +5,7 @@
 package view;
 
 import model.Cliente;
-import model.ClienteTableModel;
+import model.TableModel.ClienteTableModel;
 import controller.ClienteController;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model;
+package model.TableModel;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import model.Produto;
 
 /**
  *
@@ -13,7 +14,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ProdutoTableModel extends AbstractTableModel{
     
-    private final String[] colunas = {"Código","Nome","Descrição","Quantidade"};
+    private final String[] colunas = {"Código","Nome","Descrição"};
     private List<Produto> produtos;
     
     public ProdutoTableModel(List<Produto> produtos){
@@ -40,8 +41,6 @@ public class ProdutoTableModel extends AbstractTableModel{
                 return p.getNome();
             case 2:
                 return p.getDescricao();
-            case 3:  
-                return p.getQuantidade();
             default: 
                 return null;
         }
