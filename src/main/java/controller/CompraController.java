@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import model.Compra;
+import model.CompraDetalhada;
 import model.Produto;
 /**
  *
@@ -20,14 +21,13 @@ import model.Produto;
  */
 public class CompraController {
     
-       // CREATE
     public void inserir(Compra compra) {
-        String sql = "INSERT INTO Compra (Id, IdProduto, Quantidade, Preco) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Compra (Id, CodigoProduto, Quantidade, Preco) VALUES (?, ?, ?, ?)";
         try (Connection conn = Conexao.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, compra.getId());
-            stmt.setString(2, compra.getProduto().getCodigo());
+            stmt.setString(2, compra.getCodigoProduto());
             stmt.setInt(3, compra.getQuantidade());
             stmt.setDouble(4, compra.getPreco());
 
@@ -38,7 +38,7 @@ public class CompraController {
         }
     }
 
-    // READ (buscar todos)
+    // READ (buscar todas as compras)
     public List<Compra> listar() {
         List<Compra> compras = new ArrayList<>();
         String sql = "SELECT * FROM Compra";
@@ -48,14 +48,13 @@ public class CompraController {
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                Produto p = new Produto(rs.getString("IdProduto"));
-                Compra c = new Compra(
+                Compra compra = new Compra(
                         rs.getInt("Id"),
-                        p,
+                        rs.getString("CodigoProduto"),
                         rs.getInt("Quantidade"),
                         rs.getDouble("Preco")
                 );
-                compras.add(c);
+                compras.add(compra);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,7 +62,7 @@ public class CompraController {
         return compras;
     }
 
-    // READ (buscar por matrícula)
+    // READ (buscar por ID)
     public Compra buscarPorId(int id) {
         String sql = "SELECT * FROM Compra WHERE Id = ?";
         try (Connection conn = Conexao.getConexao();
@@ -72,12 +71,10 @@ public class CompraController {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
 
-            Produto p = new Produto(rs.getString("IdProduto"));
-
             if (rs.next()) {
                 return new Compra(
                         rs.getInt("Id"),
-                        p,
+                        rs.getString("CodigoProduto"),
                         rs.getInt("Quantidade"),
                         rs.getDouble("Preco")
                 );
@@ -90,15 +87,14 @@ public class CompraController {
 
     // UPDATE
     public void atualizar(Compra compra) {
-        String sql = "UPDATE Compra SET IdProduto=?, Quantidade=?, Preco=?, WHERE Id=?";
+        String sql = "UPDATE Compra SET CodigoProduto=?, Quantidade=?, Preco=? WHERE Id=?";
         try (Connection conn = Conexao.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, compra.getProduto().getCodigo());
+            stmt.setString(1, compra.getCodigoProduto());
             stmt.setInt(2, compra.getQuantidade());
             stmt.setDouble(3, compra.getPreco());
             stmt.setInt(4, compra.getId());
-
 
             stmt.executeUpdate();
             System.out.println("Compra atualizada com sucesso!");
@@ -109,7 +105,7 @@ public class CompraController {
 
     // DELETE
     public void deletar(int id) {
-        String sql = "DELETE FROM Compra WHERE Id=?";
+        String sql = "DELETE FROM Compra WHERE Id = ?";
         try (Connection conn = Conexao.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -119,5 +115,72 @@ public class CompraController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    } 
+    
+    public List<String> listarComProduto() {
+        List<String> compras = new ArrayList<>();
+        String sql = """
+            SELECT c.Id, p.Nome, p.Descricao, c.Quantidade, c.Preco
+            FROM Compra c
+            INNER JOIN Produto p ON c.CodigoProduto = p.Codigo
+            """;
+
+        try (Connection conn = Conexao.getConexao();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                int id = rs.getInt("Id");
+                String nomeProduto = rs.getString("Nome");
+                String descricao = rs.getString("Descricao");
+                int quantidade = rs.getInt("Quantidade");
+                double preco = rs.getDouble("Preco");
+                double total = quantidade * preco;
+
+                String linha = String.format(
+                    "Compra ID: %d | Produto: %s - %s | Qtd: %d | Preço: %.2f | Total: %.2f",
+                    id, nomeProduto, descricao, quantidade, preco, total
+                );
+
+                compras.add(linha);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return compras;
     }
+    
+    public List<CompraDetalhada> listarDetalhadas() {
+        List<CompraDetalhada> lista = new ArrayList<>();
+        String sql = """
+            SELECT c.Id, p.Nome, p.Descricao, c.Quantidade, c.Preco
+            FROM Compra c
+            INNER JOIN Produto p ON c.CodigoProduto = p.Codigo
+        """;
+
+        try (Connection conn = Conexao.getConexao();
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                CompraDetalhada cd = new CompraDetalhada(
+                    rs.getInt("Id"),
+                    rs.getString("Nome"),
+                    rs.getString("Descricao"),
+                    rs.getInt("Quantidade"),
+                    rs.getDouble("Preco")
+                );
+                lista.add(cd);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return lista;
+    }
+
+
 }

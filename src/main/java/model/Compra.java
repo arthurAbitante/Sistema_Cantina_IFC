@@ -10,15 +10,15 @@ package model;
  */
 public class Compra {
     private int id;
-    private Produto produto;
+    private String codigoProduto;
     private int quantidade;
     private double preco;
     
     public Compra(){}
     
-    public Compra(int id, Produto produto, int quantidade, double preco){
+    public Compra(int id, String codigoProduto, int quantidade, double preco){
         this.id = id;
-        this.produto = produto;
+        this.codigoProduto = codigoProduto;
         this.quantidade = quantidade;
         this.preco = preco;
     }
@@ -26,8 +26,8 @@ public class Compra {
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
     
-    public Produto getProduto() { return produto; }
-    public void setProduto(Produto produto) { this.produto = produto; }
+    public String getCodigoProduto() { return codigoProduto; }
+    public void setCodigoProduto(String codigoProduto) { this.codigoProduto = codigoProduto; }
     
     public int getQuantidade() { return quantidade; }
     public void setQuantidade(int quantidade) { this.quantidade = quantidade; }

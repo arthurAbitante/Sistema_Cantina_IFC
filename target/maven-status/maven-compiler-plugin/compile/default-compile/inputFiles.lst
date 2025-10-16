@@ -1,10 +1,15 @@
 /home/arthur/NetBeansProjects/EngSoft/src/main/java/bd/Conexao.java
 /home/arthur/NetBeansProjects/EngSoft/src/main/java/controller/ClienteController.java
+/home/arthur/NetBeansProjects/EngSoft/src/main/java/controller/CompraController.java
 /home/arthur/NetBeansProjects/EngSoft/src/main/java/controller/ProdutoController.java
 /home/arthur/NetBeansProjects/EngSoft/src/main/java/model/Cliente.java
-/home/arthur/NetBeansProjects/EngSoft/src/main/java/model/ClienteTableModel.java
+/home/arthur/NetBeansProjects/EngSoft/src/main/java/model/Compra.java
+/home/arthur/NetBeansProjects/EngSoft/src/main/java/model/CompraDetalhada.java
 /home/arthur/NetBeansProjects/EngSoft/src/main/java/model/Produto.java
-/home/arthur/NetBeansProjects/EngSoft/src/main/java/model/ProdutoTableModel.java
+/home/arthur/NetBeansProjects/EngSoft/src/main/java/model/TableModel/ClienteTableModel.java
+/home/arthur/NetBeansProjects/EngSoft/src/main/java/model/TableModel/CompraTableModel.java
+/home/arthur/NetBeansProjects/EngSoft/src/main/java/model/TableModel/ProdutoTableModel.java
 /home/arthur/NetBeansProjects/EngSoft/src/main/java/view/TelaClientes.java
+/home/arthur/NetBeansProjects/EngSoft/src/main/java/view/TelaCompras.java
 /home/arthur/NetBeansProjects/EngSoft/src/main/java/view/TelaPrincipal.java
 /home/arthur/NetBeansProjects/EngSoft/src/main/java/view/TelaProdutos.java

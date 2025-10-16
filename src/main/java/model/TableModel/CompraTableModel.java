@@ -6,18 +6,17 @@ package model.TableModel;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import model.Compra;
+import model.CompraDetalhada;
 
 /**
  *
  * @author arthur
  */
 public class CompraTableModel extends AbstractTableModel{
-
-    private final String[] colunas = {"Produto", "Descrição", "Quantidade", "Preço"};
-    private List<Compra> compras;
-
-    public CompraTableModel(List<Compra> compras){
+    private final String[] colunas = {"ID", "Nome do Produto", "Descrição", "Quantidade", "Preço Unitário", "Valor Total"};
+    private List<CompraDetalhada> compras;
+    
+    public CompraTableModel(List<CompraDetalhada> compras) {
         this.compras = compras;
     }
     
@@ -33,24 +32,31 @@ public class CompraTableModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Compra c = compras.get(rowIndex);
+        CompraDetalhada c = compras.get(rowIndex);
         switch (columnIndex) {
-            case 0: return c.getProduto().getNome();
-            case 1: return c.getProduto().getDescricao();
-            case 2: return c.getQuantidade();
-            case 3: return c.getPreco();
-  
-            default: return null;
+            case 0:
+                return c.getId();
+            case 1:
+                return c.getNomeProduto();
+            case 2:
+                return c.getDescricaoProduto();
+            case 3:
+                return c.getQuantidade();
+            case 4:
+                return String.format("R$ %.2f", c.getPreco());
+            case 5:
+                return String.format("R$ %.2f", c.getValorTotal());
+            default:
+                return null;
         }
-
     }
-    
-        @Override
+
+    @Override
     public String getColumnName(int column) {
         return colunas[column];
     }
-
-    public void setClientes(List<Compra> compras) {
+    
+    public void setCompras(List<CompraDetalhada> compras) {
         this.compras = compras;
         fireTableDataChanged();
     }

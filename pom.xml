@@ -23,4 +23,5 @@
             <type>jar</type>
         </dependency>
     </dependencies>
+    <name>Sistema_Cantina_IFC</name>
 </project>
