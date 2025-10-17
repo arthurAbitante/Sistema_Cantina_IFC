@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -38,50 +39,63 @@ public class TelaCompras  extends JFrame {
     private JButton btnCadastrar, btnListar, btnRecarregar;
     private CompraController compraController;
     private ProdutoController produtoController;
+    private CompraTableModel modelo;
 
     public TelaCompras() {
+        compraController = new CompraController();
+        produtoController = new ProdutoController();
+        
+        
+              // Tabela
+        modelo = new CompraTableModel(compraController.listarDetalhadas());
+        tabelaCompras = new JTable(modelo);
+        JScrollPane scroll = new JScrollPane(tabelaCompras);
+        
+        JPanel formPanel = new JPanel(new GridLayout(7, 2, 5, 5));
+        formPanel.setBorder(BorderFactory.createTitledBorder("Dados da Compra"));
+    /*    
         setTitle("Gestão de Compras");
         setSize(900, 500);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+        setLayout(new BorderLayout());*/
 
-        compraController = new CompraController();
-        produtoController = new ProdutoController();
+
 
         // Painel de formulário
-        JPanel painelForm = new JPanel(new GridLayout(2, 3, 10, 10));
+//        JPanel painelForm = new JPanel(new GridLayout(2, 3, 10, 10));
         comboProduto = new JComboBox<>();
         txtQuantidade = new JTextField();
         txtPreco = new JTextField();
         
-        btnCadastrar = new JButton("🛒 Cadastrar Compra");
 
-        painelForm.add(new JLabel("Produto:"));
-        painelForm.add(comboProduto);
-        painelForm.add(new JLabel());
-        painelForm.add(new JLabel("Quantidade:"));
-        painelForm.add(txtQuantidade);
-        painelForm.add(new JLabel());
-
-        painelForm.add(new JLabel("Preço:"));
-        painelForm.add(txtPreco);
+        formPanel.add(new JLabel("Produto:"));
+        formPanel.add(comboProduto);
+        formPanel.add(new JLabel("Quantidade:"));
+        formPanel.add(txtQuantidade);
+        formPanel.add(new JLabel("Preço:"));
+        formPanel.add(txtPreco);
         
-        painelForm.add(btnCadastrar);
+        
+        
+        //formPanel.add(btnCadastrar);
 
         // Painel de botões da tabela
-        btnListar = new JButton("📋 Listar");
-        btnRecarregar = new JButton("🔄 Recarregar");
         JPanel painelBotoes = new JPanel();
+
+        btnCadastrar = new JButton("🛒 Cadastrar Compra");
+        btnListar = new JButton("Listar");
+        btnRecarregar = new JButton("🔄 Recarregar");
+        
         painelBotoes.add(btnListar);
         painelBotoes.add(btnRecarregar);
+        painelBotoes.add(btnCadastrar);
 
-        // Tabela
-        tabelaCompras = new JTable();
-        JScrollPane scroll = new JScrollPane(tabelaCompras);
+//fazer o atualizar
+  
 
-        add(painelForm, BorderLayout.NORTH);
         add(scroll, BorderLayout.CENTER);
+        add(formPanel, BorderLayout.NORTH);
         add(painelBotoes, BorderLayout.SOUTH);
 
         // Carrega produtos no combo e tabela
@@ -92,6 +106,11 @@ public class TelaCompras  extends JFrame {
         btnCadastrar.addActionListener((ActionEvent e) -> cadastrarCompra());
         btnListar.addActionListener((ActionEvent e) -> listarCompras());
         btnRecarregar.addActionListener((ActionEvent e) -> carregarTabela());
+        
+        setTitle("CRUD Compras");
+        setSize(900, 500);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private void carregarProdutos() {
