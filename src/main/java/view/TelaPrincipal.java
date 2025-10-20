@@ -43,10 +43,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -92,21 +90,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenu3.setText("Compra");
 
-        jMenuItem6.setText("Cadastro");
+        jMenuItem6.setText("Cadastro/Listagem");
         jMenu3.add(jMenuItem6);
-
-        jMenuItem7.setText("Listagem/Relatório");
-        jMenu3.add(jMenuItem7);
 
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Venda");
 
-        jMenuItem8.setText("Cadastro");
+        jMenuItem8.setText("Cadastro/Listagem");
         jMenu4.add(jMenuItem8);
-
-        jMenuItem9.setText("Listagem/Relatório");
-        jMenu4.add(jMenuItem9);
 
         jMenuBar1.add(jMenu4);
 
@@ -173,9 +165,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables

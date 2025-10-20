@@ -34,7 +34,7 @@ import model.TableModel.CompraTableModel;
 public class TelaCompras  extends JFrame {
  
     private JTable tabelaCompras;
-    private JComboBox<String> comboProduto;
+    private JComboBox<Produto> comboProduto;
     private JTextField txtQuantidade, txtPreco;
     private JButton btnCadastrar, btnListar, btnRecarregar;
     private CompraController compraController;
@@ -76,7 +76,9 @@ public class TelaCompras  extends JFrame {
         formPanel.add(new JLabel("Preço:"));
         formPanel.add(txtPreco);
         
-        
+                // Carrega produtos no combo e tabela
+        carregarProdutos();
+        carregarTabela();
         
         //formPanel.add(btnCadastrar);
 
@@ -93,14 +95,9 @@ public class TelaCompras  extends JFrame {
 
 //fazer o atualizar
   
-
         add(scroll, BorderLayout.CENTER);
         add(formPanel, BorderLayout.NORTH);
         add(painelBotoes, BorderLayout.SOUTH);
-
-        // Carrega produtos no combo e tabela
-        carregarProdutos();
-        carregarTabela();
 
         // Ações
         btnCadastrar.addActionListener((ActionEvent e) -> cadastrarCompra());
@@ -117,7 +114,7 @@ public class TelaCompras  extends JFrame {
         comboProduto.removeAllItems();
         List<Produto> produtos = produtoController.listar();
         for (Produto p : produtos) {
-            comboProduto.addItem("Nome: "+ p.getNome()+ "Descrição: " + p.getDescricao());
+            comboProduto.addItem(p);
         }
     }
 
@@ -133,6 +130,7 @@ public class TelaCompras  extends JFrame {
 
     private void cadastrarCompra() {
         try {
+            
             Produto produtoSelecionado = (Produto) comboProduto.getSelectedItem();
             int quantidade = Integer.parseInt(txtQuantidade.getText().trim());
             double preco = Double.parseDouble(txtPreco.getText().trim());

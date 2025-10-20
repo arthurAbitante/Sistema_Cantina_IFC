@@ -34,7 +34,8 @@ public class CompraController {
             stmt.executeUpdate();
             System.out.println("Compra inserida com sucesso!");
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Erro: "+ e);
+           // e.printStackTrace();
         }
     }
 

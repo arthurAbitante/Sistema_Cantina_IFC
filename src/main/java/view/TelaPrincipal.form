@@ -70,12 +70,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cadastro"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Listagem/Relat&#xf3;rio"/>
+                <Property name="text" type="java.lang.String" value="Cadastro/Listagem"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -87,12 +82,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem8">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Cadastro"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem9">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Listagem/Relat&#xf3;rio"/>
+                <Property name="text" type="java.lang.String" value="Cadastro/Listagem"/>
               </Properties>
             </MenuItem>
           </SubComponents>
