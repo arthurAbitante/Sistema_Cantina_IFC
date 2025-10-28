@@ -4,6 +4,7 @@
  */
 package view;
 
+import com.google.protobuf.TextFormat.ParseException;
 import model.Cliente;
 import model.TableModel.ClienteTableModel;
 import controller.ClienteController;
@@ -12,6 +13,7 @@ import java.awt.GridLayout;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,6 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -47,13 +50,41 @@ public class TelaClientes extends javax.swing.JFrame {
         formPanel.setBorder(BorderFactory.createTitledBorder("Dados do Cliente"));
 
         txtMatricula = new JTextField();
-        txtCpf = new JTextField();
+        //txtCpf = new JTextField();
         txtRg = new JTextField();
         txtNome = new JTextField();
         txtCurso = new JTextField();
         txtIdade = new JTextField();
         txtEndereco = new JTextField();
 
+        
+    
+        
+          MaskFormatter maskCPF = null;
+   
+        try {
+            maskCPF = new MaskFormatter("###.###.###-##");
+        } catch (java.text.ParseException ex) {
+            System.getLogger(TelaClientes.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
+            maskCPF.setPlaceholderCharacter('_'); // Define o caractere de espaço vazio (opcional)
+
+
+        // Cria o JFormattedTextField com a máscara
+        JFormattedTextField txtCpf = new JFormattedTextField(maskCPF);
+        txtCpf.setColumns(12); // Define o tamanho do campo
+
+        // Cria e adiciona um rótulo para o campo
+        //JLabel cpfLabel = new JLabel("CPF:");
+
+        // Adiciona os componentes ao JFrame
+        //add(cpfLabel);
+       // add(cpfField);
+        
+        
+        
+        
+        
         formPanel.add(new JLabel("Matrícula:"));
         formPanel.add(txtMatricula);
         formPanel.add(new JLabel("CPF:"));
@@ -227,6 +258,8 @@ public class TelaClientes extends javax.swing.JFrame {
 
         /* Create and display the form */
         SwingUtilities.invokeLater(() -> new TelaClientes().setVisible(true));
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -36,7 +36,7 @@ public class TelaCompras  extends JFrame {
     private JTable tabelaCompras;
     private JComboBox<Produto> comboProduto;
     private JTextField txtQuantidade, txtPreco;
-    private JButton btnCadastrar, btnListar, btnRecarregar;
+    private JButton btnCadastrar, btnListar, btnRecarregar, btnAtualizar;
     private CompraController compraController;
     private ProdutoController produtoController;
     private CompraTableModel modelo;
@@ -73,7 +73,7 @@ public class TelaCompras  extends JFrame {
         formPanel.add(comboProduto);
         formPanel.add(new JLabel("Quantidade:"));
         formPanel.add(txtQuantidade);
-        formPanel.add(new JLabel("Preço:"));
+        formPanel.add(new JLabel("Preço Unitário:"));
         formPanel.add(txtPreco);
         
                 // Carrega produtos no combo e tabela
@@ -85,13 +85,16 @@ public class TelaCompras  extends JFrame {
         // Painel de botões da tabela
         JPanel painelBotoes = new JPanel();
 
-        btnCadastrar = new JButton("🛒 Cadastrar Compra");
+        btnCadastrar = new JButton("🛒Cadastrar Compra");
+        btnAtualizar = new JButton("Atualizar Compra");
         btnListar = new JButton("Listar");
         btnRecarregar = new JButton("🔄 Recarregar");
         
+
         painelBotoes.add(btnListar);
         painelBotoes.add(btnRecarregar);
         painelBotoes.add(btnCadastrar);
+        painelBotoes.add(btnAtualizar);
 
 //fazer o atualizar
   
@@ -103,7 +106,9 @@ public class TelaCompras  extends JFrame {
         btnCadastrar.addActionListener((ActionEvent e) -> cadastrarCompra());
         btnListar.addActionListener((ActionEvent e) -> listarCompras());
         btnRecarregar.addActionListener((ActionEvent e) -> carregarTabela());
-        
+        btnAtualizar.addActionListener((ActionEvent e) -> atualizarTabela());
+        tabelaCompras.getSelectionModel().addListSelectionListener(e -> preencherCampos());
+
         setTitle("CRUD Compras");
         setSize(900, 500);
         setLocationRelativeTo(null);
@@ -123,6 +128,30 @@ public class TelaCompras  extends JFrame {
         tabelaCompras.setModel(new CompraTableModel(lista));
     }
 
+    private void atualizarTabela(){
+        
+    }
+    
+    private void preencherCampos(){
+        int row = tabelaCompras.getSelectedRow();
+        if (row >= 0) {
+            //1 2 produto
+            //3 quantidade
+            //4 preco unitario
+          //  txtMatricula.setText((String) tabela.getValueAt(row, 0));
+           // comboProduto.setSelectedItem(tabelaCompras.getValueAt(row, 1));
+           
+           //CompraTableModel model = (CompraTableModel) tabelaCompras.getModel();
+          // CompraDetalhada compra = model.getCompraAt(row);
+           
+            txtQuantidade.setText((String) tabelaCompras.getValueAt(row, 3));
+            txtPreco.setText((String) tabelaCompras.getValueAt(row, 4));
+            
+            // Produto produtoCompra = compra.getProduto();
+
+        }
+    }
+    
     private void listarCompras() {
         carregarTabela();
         JOptionPane.showMessageDialog(this, "Compras listadas com sucesso!");

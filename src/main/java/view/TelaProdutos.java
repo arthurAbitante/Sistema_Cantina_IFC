@@ -155,7 +155,7 @@ public class TelaProdutos extends javax.swing.JFrame {
     
     
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaClientes.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaProdutos.class.getName());
 
     
 

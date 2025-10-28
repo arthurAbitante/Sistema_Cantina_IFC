@@ -61,4 +61,8 @@ public class CompraTableModel extends AbstractTableModel{
         fireTableDataChanged();
     }
     
+    public CompraDetalhada getCompraAt(int rowIndex) {
+        return compras.get(rowIndex);
+    }
+    
 }
