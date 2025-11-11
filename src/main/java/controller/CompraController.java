@@ -22,14 +22,13 @@ import model.Produto;
 public class CompraController {
     
     public void inserir(Compra compra) {
-        String sql = "INSERT INTO Compra (Id, CodigoProduto, Quantidade, Preco) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO Compra (CodigoProduto, Quantidade, Preco) VALUES (?, ?, ?)";
         try (Connection conn = Conexao.getConexao();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, compra.getId());
-            stmt.setString(2, compra.getCodigoProduto());
-            stmt.setInt(3, compra.getQuantidade());
-            stmt.setDouble(4, compra.getPreco());
+            stmt.setString(1, compra.getCodigoProduto());
+            stmt.setInt(2, compra.getQuantidade());
+            stmt.setDouble(3, compra.getPreco());
 
             stmt.executeUpdate();
             System.out.println("Compra inserida com sucesso!");
